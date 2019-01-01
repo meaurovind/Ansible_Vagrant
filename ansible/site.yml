@@ -1,0 +1,7 @@
+---
+- hosts: local
+  become: yes
+  tasks:
+    - import_role:
+        name: install-jenkins
+      when: "ansible_facts['os_family'] == 'RedHat'"
