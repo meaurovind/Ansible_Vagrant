@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/shazChaudhry/Equal_Experts_tech_test.svg?branch=master)](https://travis-ci.org/shazChaudhry/Equal_Experts_tech_test)
+
 ## Requirements
 **Vagrant CI** - Using a configuration management language of your choosing (Ansible, Puppet, Salt, Chef) setup a Continuous Integration server of your choosing on a Vagrant Box. You are not required to setup Vagrant or its requirements on the host machine.
 
