@@ -9,13 +9,13 @@ platforms:
   - name: instance
     image: centos:latest
     # privileged: true
-    # volumes:
+    volumes:
       # - "/sys/fs/cgroup:/sys/fs/cgroup"
-      # - "/var/run/docker.sock:/var/run/docker.sock"
+      - "/var/run/docker.sock:/var/run/docker.sock"
       # - "/vagrant/docker:/vagrant/docker"
     # capabilities:
     #   - SYS_ADMIN
-    # network_mode: host
+    network_mode: host
 provisioner:
   name: ansible
   lint:
