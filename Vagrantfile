@@ -22,10 +22,6 @@ Vagrant.configure("2") do |config|
 			v.customize ["modifyvm", :id, "--memory", 3000]
 			v.customize ["modifyvm", :id, "--name", "techtest"]
 		end
-		# techtest.vm.provision "shell", name: "techtest_prerequisites", inline: "yum install -y epel-release && yum install -y git jq python-pip"
-		# techtest.vm.provision "shell", name: "molecule_prerequisites", inline: "yum install -y gcc python-devel openssl-devel libselinux-python"
-		# techtest.vm.provision "shell", name: "install_molecule", inline: "runuser -l  vagrant -c 'pip install --user molecule'"
-		# techtest.vm.provision "shell", name: "additional_tools", inline: "yum install -y net-tools"
 		# https://www.vagrantup.com/docs/provisioning/ansible_local.html
 		techtest.vm.provision "ansible_local" do |ansible|
 			ansible.playbook 						= "ansible/site.yml"
@@ -34,7 +30,12 @@ Vagrant.configure("2") do |config|
 			ansible.compatibility_mode	= "2.0"
 			# ansible.verbose        			= true
 			ansible.galaxy_role_file 		= "ansible/roles/requirements.yml"
-			ansible.galaxy_command 			= "sudo ansible-galaxy install --role-file=%{role_file} --roles-path=%{roles_path} --force"
+			ansible.galaxy_command 			= "ansible-galaxy install --role-file=%{role_file} --roles-path=%{roles_path} --force"
 		end
+		# The packages below are only required if you indend to test the jenkins role
+		techtest.vm.provision "shell", name: "techtest_prerequisites", inline: "yum install -y epel-release && yum install -y git jq python-pip"
+		techtest.vm.provision "shell", name: "molecule_prerequisites", inline: "yum install -y gcc python-devel openssl-devel libselinux-python"
+		techtest.vm.provision "shell", name: "install_molecule", inline: "runuser -l  vagrant -c 'pip install --user molecule'"
+		techtest.vm.provision "shell", name: "additional_tools", inline: "yum install -y net-tools"
 	end
 end
