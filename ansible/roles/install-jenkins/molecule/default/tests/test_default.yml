@@ -1,6 +1,5 @@
-# Molecule managed
-
 ---
+
 file:
   /etc/hosts:
     exists: true
