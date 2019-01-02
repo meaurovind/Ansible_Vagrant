@@ -4,4 +4,5 @@
   tasks:
     - import_role:
         name: install-jenkins
+      tags: ["jenkins"]
       when: "ansible_facts['os_family'] == 'RedHat'"

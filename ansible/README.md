@@ -11,7 +11,7 @@ This alias is only required if git is not already installed on your machine. Thi
 
 ## Jenkins server setup
 - `cd Equal_Experts_tech_test`
-- 
+-
 
 ## Running individual Molecule commands
 You will need to update relevant files under molecule directory and then execute the role inside a docker container as follows _(install-jenkins role is assumed here)_. You will also need to ensure that all existing container have stoped and removed: `docker container stop $(docker container ps -aq)`.
@@ -38,6 +38,6 @@ You will need to update relevant files under molecule directory and then run the
 ```
 
 ## References
-- quay.io/repository/ansible/molecule - Docker container used for testing Ansible roles
-- molecule.readthedocs.io - Molecule is designed to aid in the development and testing of Ansible roles. Molecule provides support for testing with multiple instances, operating systems and distributions, virtualization providers, test frameworks and testing scenarios.
-- github.com/aelsabbahy/goss - Goss is a YAML based serverspec alternative tool for validating a server’s configuration. It eases the process of writing tests by allowing the user to generate tests from the current system state.
+- [quay.io/repository/ansible/molecule](https://quay.io/repository/ansible/molecule) - Docker container used for testing Ansible roles
+- [molecule.readthedocs.io](https://molecule.readthedocs.io/en/latest/) - Molecule is designed to aid in the development and testing of Ansible roles. Molecule provides support for testing with multiple instances, operating systems and distributions, virtualization providers, test frameworks and testing scenarios.
+- [github.com/aelsabbahy/goss](https://github.com/aelsabbahy/goss) - Goss is a YAML based serverspec alternative tool for validating a server’s configuration. It eases the process of writing tests by allowing the user to generate tests from the current system state.

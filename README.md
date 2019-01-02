@@ -28,8 +28,11 @@ The assumption here is that this solution will be developed on a Windows 10 pro 
       1. `cd Equal_Experts_tech_test`
   1. Launch the guest machine:
       1. `clear && vagrant up --color`
-  1. Should you have a need to SSH to the box _(e.g. troubleshooting)_, then run the following command:
+  1. Should you have a need to SSH to vagrant box and run ansible playbook _(e.g. troubleshooting)_, then run the following commands:
       1.  `vagrant ssh`
+      1. `cd /vagrant/ansible`
+      1. `export ANSIBLE_CONFIG=./ansible.cfg`. Without this system variable, you may get an error / warning saying _Ansible is being run in a world writable directory_
+      1. - `ansible-playbook site.yml`
 
 ### Testing
 - Jenkins as a service starts up as part of Vagrant Box provisionning. The web URL serving out the Jenkins login page should be accessible at [http://techtest:8080/jenkins](http://techtest:8080/jenkins)

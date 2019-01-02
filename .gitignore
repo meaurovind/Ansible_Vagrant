@@ -3,4 +3,5 @@
 ansible/site.retry
 ansible/**/site.retry
 ansible/**/test.retry
-ansible/roles/roles
+ansible/roles/geerlingguy.java
+ansible/roles/geerlingguy.jenkins
