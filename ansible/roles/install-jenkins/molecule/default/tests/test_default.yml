@@ -7,7 +7,7 @@ file:
     group: root
 
 http:
-  http://techtest:8080/jenkins/:
+  http://127.0.0.1:8080/jenkins/:
     status: 200
     # body: [<H1>Hello World</H1>]
 

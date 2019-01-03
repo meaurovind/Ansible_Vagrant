@@ -13,7 +13,6 @@
       - openssl-devel
       - libselinux-python
       - net-tools
-      # - java-1.8.0-openjdk-devel
 
   tasks:
     - name: Enable EPEL repository

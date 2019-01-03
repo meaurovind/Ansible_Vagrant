@@ -19,14 +19,13 @@ Vagrant.configure("2") do |config|
 		techtest.vm.network :private_network, ip: "192.168.99.201"
 		techtest.vm.provider :virtualbox do |v|
 			v.customize ["modifyvm", :id, "--natdnshostresolver1", "on"]
-			v.customize ["modifyvm", :id, "--memory", 3000]
+			v.customize ["modifyvm", :id, "--memory", 4000]
 			v.customize ["modifyvm", :id, "--name", "techtest"]
 		end
 		# https://www.vagrantup.com/docs/provisioning/ansible_local.html
 		techtest.vm.provision "ansible_local" do |ansible|
 			ansible.playbook 						= "ansible/site.yml"
-			ansible.inventory_path 			= "ansible/hosts"
-			ansible.config_file					= "ansible/ansible.cfg"
+			ansible.inventory_path 			= "ansible/vagrant_hosts"
 			ansible.compatibility_mode	= "2.0"
 			# ansible.verbose        			= true
 			ansible.galaxy_role_file 		= "ansible/roles/requirements.yml"
