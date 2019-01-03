@@ -1,9 +1,9 @@
 ---
-language: python
+# language: python
 services: docker
 
-install:
-  - pip install molecule docker
+# install:
+#   - pip install molecule docker
 
 before_script:
   - cd ansible/roles/install-jenkins
