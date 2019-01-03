@@ -33,7 +33,7 @@ scenario:
     # - idempotence   # Disabling this for the time being as this causes tests to fail
     - side_effect
     - verify
-    - destroy
+    # - destroy
 verifier:
   name: goss
   lint:
