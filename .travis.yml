@@ -10,7 +10,3 @@ before_script:
 
 script:
   - molecule test
-
-after_script:
-  - sudo netstat -plnt
-  - molecule destroy

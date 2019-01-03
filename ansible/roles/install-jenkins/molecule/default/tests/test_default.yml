@@ -11,6 +11,8 @@ http:
     status: 200
     # body: [<H1>Hello World</H1>]
 
+
+# On local build, it is tcp6. However, on Travis it is tcp of some reason
 # port:
 #   tcp6:8080:
 #     listening: true
