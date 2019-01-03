@@ -6,13 +6,13 @@ file:
     owner: root
     group: root
 
-http:
-  http://127.0.0.1:8080/jenkins/:
-    status: 200
-    # body: [<H1>Hello World</H1>]
-
-port:
-  tcp6:8080:
-    listening: true
-    ip:
-      - '::'
+# http:
+#   http://127.0.0.1:8080/jenkins/:
+#     status: 200
+#     # body: [<H1>Hello World</H1>]
+#
+# port:
+#   tcp6:8080:
+#     listening: true
+#     ip:
+#       - '::'
