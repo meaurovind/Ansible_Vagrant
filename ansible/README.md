@@ -19,33 +19,39 @@ Newer versions of Jenkins require Java 8+ and so it must be installed before exe
 Running the main playbook will ensure that all dependant galaxy roles are downloaded and installed before Jenkins is installed
 - `ansible-playbook site.yml`
 
-## Jenkins URL
+## Access Jenkins
 The web URL serving out the Jenkins login page should be accessible at [http://techtest:8080/jenkins](http://techtest:8080/jenkins)
   - username = `admin`
   - password = `admin`
 
-## Running individual Molecule commands
-Docker and Molecule are prerequisites to test roles. Please ensure these tools are already installed.
-
-You will need to update relevant files under molecule directory and then may execute individual stages of the molecule workflow below. Change directory to the role to be tested and then run `molecule [COMMAND]` where list of COMMANDs are shown below:
-
-- Ensure all existing container have stoped and removed:
+## Shutdown Jenkins and remove containers
+Action the steps below before continuing with testing
+- Ensure all existing / running container are stoped and removed:
   - `docker container stop $(docker container ps -aq)`
   - `docker container rm $(docker container ps -aq)`
 - Also, ensure Jenkins is not running:
   - `sudo systemctl stop jenkins`
   - `sudo systemctl disable jenkins`
-- Change the directory to the role to be tested:
-  - `cd roles/install-jenkins`
+
+## Testing the ansible role
+Docker and Molecule are prerequisites to testing roles. Please ensure these tools are already installed.
+
+You will need to update relevant files under molecule directory and then may execute tests. Change directory to the role to be tested and then run:
+- `cd roles/install-jenkins`
+- `molecule test`
+
+Or you could run the individual scenarios below:
+- dependency - download dependant roles mentioned in the requirements file
 - lint - Executes yaml-lint, ansible-lint, and flake8, reporting failure if there are issues
 - syntax - Verifies the role for syntax errors
-<!-- - create - Creates an instance with the configured driver
-- prepare - Configures instances with preparation playbooks -->
+- create - Creates an instance with the configured driver
+- prepare - Configures instances with preparation playbooks
 - converge - Executes playbooks targeting hosts
-<!-- - idempotence - Executes a playbook twice and fails in case of changes in the second run (non-idempotent) -->
+- idempotence - Executes a playbook twice and fails in case of changes in the second run (non-idempotent)
+  - idempotence has been disable in molecule.yml. See the YMAL file for comments
 - verify - Execute server state verification tools (goss)
 - destroy - Destroys instances
-<!-- - test - Executes all the previous steps -->
+- test - Executes all the previous steps
 > The `login` command can be used to connect to provisioned servers for troubleshooting purposes
 
 ## References

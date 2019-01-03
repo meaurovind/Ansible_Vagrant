@@ -34,7 +34,7 @@ The assumption here is that this solution will be developed on a Windows 10 pro 
       1.  `vagrant ssh`
       1. `cd /vagrant/ansible`
       1. `export ANSIBLE_CONFIG=./ansible.cfg`. Without this system variable, you may get an error / warning saying _Ansible is being run in a world writable directory_
-      1. - `ansible-playbook site.yml`
+      1. `ansible-playbook site.yml`
 
 ### Testing
 - Jenkins as a service starts up as part of Vagrant Box provisionning. The web URL serving out the Jenkins login page should be accessible at [http://techtest:8080/jenkins](http://techtest:8080/jenkins)

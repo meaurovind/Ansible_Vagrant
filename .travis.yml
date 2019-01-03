@@ -3,19 +3,10 @@ language: python
 services: docker
 
 install:
-  # Install test dependencies.
   - pip install molecule docker
 
 before_script:
-  - cd ansible
-  - ansible-galaxy install -r roles/requirements.yml
-  - cd roles/install-jenkins
+  - cd ansible/roles/install-jenkins
 
 script:
-  # - molecule test # Disabling this for the time being as "idempotence" phase causes the tests to fail. So, running individual phase instead
-  - molecule lint
-  - molecule syntax
-  - molecule syntax
-  - molecule converge
-  - molecule verify
-  - molecule destroy
+  - molecule test
