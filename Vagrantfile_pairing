@@ -2,34 +2,35 @@
 # vi: set ft=ruby :
 
 Vagrant.configure("2") do |config|
-	# https://app.vagrantup.com/centos/boxes/7
-	config.vm.box = "centos/7"
-	config.hostmanager.enabled = true
-	config.hostmanager.manage_host = true
-	config.hostmanager.manage_guest = true
-	# The VirtualBox Guest Additions are not preinstalled; if you need them for shared folders,
-	# please install the vagrant-vbguest (https://github.com/dotless-de/vagrant-vbguest) plugin and
-	# add the following line to your Vagrantfile:
-	config.vm.synced_folder ".", "/vagrant", type: "virtualbox"
-	# Please check the release blog for a full list of known limitations
+	# https://app.vagrantup.com/cwolff/boxes/centos7
+	# config.vm.box 									= "cwolff/centos7"
 
+	# https://app.vagrantup.com/ralfkrause/boxes/centos7
+	config.vm.box 									= "ralfkrause/centos7"
+	config.hostmanager.enabled 			= true
+	config.hostmanager.manage_host 	= true
+	config.hostmanager.manage_guest = true
+
+	config.vm.provision "shell", name: "package_udates", 					inline: "yum update -y"
+	config.vm.provision "shell", name: "development_tools", 			inline: "yum groupinstall -y 'Development Tools'"
+	config.vm.provision "shell", name: "install_openjdk", 				inline: "yum install -y java-1.8.0-openjdk-devel"
+	config.vm.provision "shell", name: "install_ruby", 						inline: "yum install -y ruby"
+	config.vm.provision "shell", name: "enable_epel", 						inline: "yum install -y epel-release"
+	config.vm.provision "shell", name: "install_molecule_prereq", inline: "yum install -y gcc python-pip python-devel openssl-devel libselinux-python"
+	config.vm.provision "shell", name: "upgrade_pip", 						inline: "pip install --upgrade pip"
+	config.vm.provision "shell", name: "install_molecule", 				inline: "runuser -l  vagrant -c 'pip install --user molecule docker'"
+	config.vm.provision "shell", name: "additional_tools", 				inline: "yum install -y jq wget net-tools"
+	# config.vm.provision "shell", name: "install_terraform",
+	# #  	inline: "wget https://releases.hashicorp.com/terraform/0.11.11/terraform_0.11.11_linux_amd64.zip && unzip terraform_0.11.11_linux_amd64.zip -d /usr/bin && rm -rf terraform*"
 	config.vm.provision "docker"
+	config.vm.provision "shell", 	name: "docker_swarm_cluster", 	inline: "docker swarm init --advertise-addr 192.168.99.201 --listen-addr 192.168.99.201:2377"
 	config.vm.define "techtest", primary: true do |techtest|
 		techtest.vm.hostname = 'techtest'
 		techtest.vm.network :private_network, ip: "192.168.99.201"
 		techtest.vm.provider :virtualbox do |v|
 			v.customize ["modifyvm", :id, "--natdnshostresolver1", "on"]
-			v.customize ["modifyvm", :id, "--memory", 5000]
+			v.customize ["modifyvm", :id, "--memory", 4000]
 			v.customize ["modifyvm", :id, "--name", "techtest"]
 		end
-		# The packages below are only required if you indend to test the jenkins role
-		techtest.vm.provision "shell", name: "Tech test prerequisites",
-			inline: "yum install -y epel-release && yum install -y net-tools git jq python-pip gcc python-devel openssl-devel libselinux-python"
-		techtest.vm.provision "shell", name: "Upgrade PIP",
-			inline: "pip install --upgrade pip"
-		techtest.vm.provision "shell", name: "Install molecule",
-			inline: "runuser -l  vagrant -c 'pip install --user molecule'"
-		techtest.vm.provision "shell", name: "Install python docker module",
-			inline: "pip install docker"
 	end
 end
