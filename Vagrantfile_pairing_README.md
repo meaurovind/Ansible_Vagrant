@@ -9,7 +9,7 @@ All resources developed during the pair programming exercise will be stored in t
 
 ### Docker container usage
 If you need a tool that is not available in this environment, you may use that tool in a container form. As an example, see the command below for [Maven](https://hub.docker.com/_/maven):
-- `alias mvn='docker run -it --rm -v $HOME/.m2:/root/.m2 -v $PWD:/usr/src/maven -w /usr/src/maven maven mvn'`
+- `alias mvn='docker run -it --rm --name maven --network host -v $HOME/.m2:/root/.m2 -v $PWD:/usr/src/maven -w /usr/src/maven maven mvn'`
 - `mvn --version`
 - `sudo chown -R $USER:$USER $HOME/.m2`
 
