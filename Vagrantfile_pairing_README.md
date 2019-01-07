@@ -13,6 +13,9 @@ If you need a tool that is not available in this environment, you may use that t
 - `mvn --version`
 - `sudo chown -R $USER:$USER $HOME/.m2`
 
+### Eclipse Che:
+- `docker run --rm --name eclipse-che -it -v /var/run/docker.sock:/var/run/docker.sock -v $PWD:/data eclipse/che start`
+
 ### More examples of using containers afer cloning the code:
 - `git clone https://github.com/shazChaudhry/Equal_Experts_tech_test.git`
 - `cd Equal_Experts_tech_test`
