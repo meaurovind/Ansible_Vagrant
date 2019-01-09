@@ -5,3 +5,4 @@ ansible/**/site.retry
 ansible/**/test.retry
 ansible/roles/geerlingguy.java
 ansible/roles/geerlingguy.jenkins
+**/target
